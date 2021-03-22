@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+                name="viewModel"
+                type="appdev.max.weatherapp.screen.detail.WeatherDetailViewModel" />
+
+        <variable
+                name="mainViewModel"
+                type="appdev.max.weatherapp.screen.MainViewModel" />
+
+    </data>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_main">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/weatherDetailTvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/orange"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:text="@string/current_weather"
+                    android:textColor="@color/white"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/weatherDetailClMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:animateLayoutChanges="true"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@id/weatherDetailBtnChooseCity"
+                    app:layout_constraintTop_toBottomOf="@id/weatherDetailTvTitle"
+                    tools:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/weatherDetailTvCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@{mainViewModel.selectedCityLiveData}"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:visibility="@{TextUtils.isEmpty(mainViewModel.selectedCityLiveData) ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="New York" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/weatherDetailTvDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/orange"
+                        android:paddingHorizontal="6dp"
+                        android:text="@{viewModel.date}"
+                        android:textColor="@color/white"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/weatherDetailTvCity"
+                        tools:text="25.12" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/weatherDetailTvDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="@{viewModel.weatherDescription}"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@id/weatherDetailTvDate"
+                        app:layout_constraintStart_toEndOf="@id/weatherDetailTvDate"
+                        app:layout_constraintTop_toTopOf="@id/weatherDetailTvDate"
+                        tools:text="Partly cloudy" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/weatherDetailTvTemp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/temp"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/weatherDetailTvDate" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/weatherDetailTvTempValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{viewModel.temp}"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/weatherDetailTvTemp"
+                        app:layout_constraintStart_toEndOf="@id/weatherDetailTvTemp"
+                        app:layout_constraintTop_toTopOf="@id/weatherDetailTvTemp"
+                        tools:text="+13" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/weatherDetailTvPressure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="54dp"
+                        android:text="@{viewModel.pressure}"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="@id/weatherDetailTvTempValue"
+                        app:layout_constraintStart_toEndOf="@id/weatherDetailTvTempValue"
+                        app:layout_constraintTop_toTopOf="@id/weatherDetailTvTempValue"
+                        tools:text="Pressure: 755mm" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/weatherDetailTvHumidity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="@{viewModel.humidity}"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toStartOf="@id/weatherDetailTvPressure"
+                        app:layout_constraintTop_toBottomOf="@id/weatherDetailTvPressure"
+                        tools:text="Humidity: 80%" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/weatherDetailTvClouds"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="@{viewModel.clouds}"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toStartOf="@id/weatherDetailTvHumidity"
+                        app:layout_constraintTop_toBottomOf="@id/weatherDetailTvHumidity"
+                        tools:text="Clouds: 80%" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/weatherDetailIvWindTurbine"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="40dp"
+                        android:src="@drawable/ic_wind_turbines"
+                        android:tint="@color/blue"
+                        app:layout_constraintStart_toStartOf="@id/weatherDetailTvTemp"
+                        app:layout_constraintTop_toBottomOf="@id/weatherDetailTvClouds" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/weatherDetailTvWindSpeed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@{viewModel.windSpeed}"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toStartOf="@id/weatherDetailIvWindTurbine"
+                        app:layout_constraintTop_toBottomOf="@id/weatherDetailIvWindTurbine"
+                        tools:text="Wind speed: 12 m/s" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/weatherDetailTvWindDegree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@{viewModel.windDegree}"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toStartOf="@id/weatherDetailTvWindSpeed"
+                        app:layout_constraintTop_toBottomOf="@id/weatherDetailTvWindSpeed"
+                        tools:text="Wind degree: 240°" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/weatherDetailBtnChooseCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:drawableEnd="@drawable/ic_city"
+                    android:drawablePadding="8dp"
+                    android:text="@string/choose_city"
+                    app:layout_constraintBottom_toTopOf="@id/weatherDetailCvForecast"
+                    app:layout_constraintEnd_toStartOf="@id/weatherDetailBtnUseLocation"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/weatherDetailBtnUseLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:drawableEnd="@drawable/ic_location"
+                    android:drawablePadding="8dp"
+                    android:text="@string/use_my_location"
+                    app:layout_constraintBottom_toTopOf="@id/weatherDetailCvForecast"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/weatherDetailBtnChooseCity" />
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/weatherDetailCvForecast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    android:layout_marginBottom="40dp"
+                    android:elevation="8dp"
+                    app:cardBackgroundColor="@color/orange"
+                    app:cardCornerRadius="14dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/weatherDetailTvForecast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/ic_date"
+                        android:drawablePadding="14dp"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:paddingHorizontal="48dp"
+                        android:text="@string/daily_forecast"
+                        android:textColor="@color/white"
+                        android:textSize="19sp"
+                        android:textStyle="bold" />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+                layout="@layout/layout_progress"
+                app:visibilityValue="@{viewModel.isProgress()}" />
+
+    </FrameLayout>
+
+</layout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+                name="viewModel"
+                type="appdev.max.weatherapp.screen.forecast.WeatherForecastViewModel" />
+
+        <variable
+                name="mainViewModel"
+                type="appdev.max.weatherapp.screen.MainViewModel" />
+
+    </data>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_main">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/weatherForecastIbBack"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/orange"
+                    android:src="@drawable/ic_arrow_back"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/weatherForecastTvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/daily_forecast"
+                    android:textColor="@color/black"
+                    android:textSize="21sp"
+                    app:layout_constraintBottom_toBottomOf="@id/weatherForecastIbBack"
+                    app:layout_constraintStart_toEndOf="@id/weatherForecastIbBack"
+                    app:layout_constraintTop_toTopOf="@id/weatherForecastIbBack" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:background="@color/orange"
+                    android:paddingHorizontal="4dp"
+                    android:text="@{mainViewModel.selectedCityLiveData}"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:visibility="@{TextUtils.isEmpty(mainViewModel.selectedCityLiveData) ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="@id/weatherForecastTvTitle"
+                    app:layout_constraintStart_toEndOf="@id/weatherForecastTvTitle"
+                    app:layout_constraintTop_toTopOf="@id/weatherForecastTvTitle"
+                    tools:text="Amsterdam" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/weatherForecastRvDays"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:orientation="vertical"
+                    android:paddingBottom="30dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/weatherForecastIbBack"
+                    tools:listitem="@layout/item_weather_forecast_day" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+                layout="@layout/layout_progress"
+                app:visibilityValue="@{viewModel.isProgress()}" />
+
+    </FrameLayout>
+
+</layout>

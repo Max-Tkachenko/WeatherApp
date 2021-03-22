@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+
+    <string name="common_error_technical">A technical error has occurred! Please, try again later</string>
+    <string name="common_error_internet_connection">No Internet connection! Please, try again later</string>
+    <string name="common_error_timeout">Timeout error. Please, try again later</string>
+
+    <string name="allow_location_permission">Please, allow location permission to get actual weather</string>
+
+    <string name="current_weather">Current weather</string>
+    <string name="choose_city">Choose city</string>
+    <string name="find_city">Find a city</string>
+    <string name="use_my_location">Use my location</string>
+    <string name="daily_forecast">Daily forecast</string>
+
+    <string name="temp">Temperature:</string>
+    <string name="temp_min">Temp. min:</string>
+    <string name="temp_max">Temp. max:</string>
+    <string name="pressure">Pressure: %d hPa</string>
+    <string name="humidity">Humidity: %d</string>
+    <string name="clouds">Clouds: %d</string>
+    <string name="wind_speed">Wind speed: %d meter/sec</string>
+    <string name="wind_degree">Wind degree: %d°</string>
+</resources>

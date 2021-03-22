@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_main"
+        app:startDestination="@id/weatherDetailFragment">
+
+    <fragment
+            android:id="@+id/weatherDetailFragment"
+            android:name="appdev.max.weatherapp.screen.detail.WeatherDetailFragment"
+            android:label="WeatherDetailFragment"
+            tools:layout="@layout/fragment_weather_detail">
+        <action
+                android:id="@+id/action_weatherDetailFragment_to_citiesFragment"
+                app:destination="@id/citiesFragment"
+                app:enterAnim="@anim/anim_enter_from_right"
+                app:exitAnim="@anim/anim_exit_to_left"
+                app:popEnterAnim="@anim/anim_enter_from_left"
+                app:popExitAnim="@anim/anim_exit_to_right" />
+        <action
+                android:id="@+id/action_weatherDetailFragment_to_weatherForecastFragment"
+                app:destination="@id/weatherForecastFragment"
+                app:enterAnim="@anim/anim_enter_from_right"
+                app:exitAnim="@anim/anim_exit_to_left"
+                app:popEnterAnim="@anim/anim_enter_from_left"
+                app:popExitAnim="@anim/anim_exit_to_right" />
+    </fragment>
+    <fragment
+            android:id="@+id/citiesFragment"
+            android:name="appdev.max.weatherapp.screen.cities.CitiesFragment"
+            android:label="CitiesFragment"
+            tools:layout="@layout/fragment_cities" />
+    <fragment
+            android:id="@+id/weatherForecastFragment"
+            android:name="appdev.max.weatherapp.screen.forecast.WeatherForecastFragment"
+            android:label="WeatherForecastFragment"
+            tools:layout="@layout/fragment_weather_forecast" />
+
+</navigation>
